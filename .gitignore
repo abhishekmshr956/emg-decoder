@@ -1,0 +1,23 @@
+# exclude data from the source control
+/data/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+
+# pyc files
+*.pyc
+src.egg-info/dependency_links.txt
+src.egg-info/PKG-INFO
+src.egg-info/SOURCES.txt
+src.egg-info/top_level.txt
