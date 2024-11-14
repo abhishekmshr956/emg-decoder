@@ -2,8 +2,8 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 
-from src.data.filter import Filter
-from src.data.utils import bipolar_conversion, load_data, average_reference
+from emg_decoder.src.data.filter import Filter
+from emg_decoder.src.data.utils import bipolar_conversion, load_data, average_reference
 
 
 def remove_overlaps(key_data: np.ndarray, window_pre: int, window_post: int) -> np.ndarray:

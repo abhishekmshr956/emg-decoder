@@ -1,0 +1,103 @@
+name: temporal_test
+root_dir: /home3/john/emg_decoder
+system: RTDecoder
+random_seed: 4995
+metadata:
+  configuration: unipolar
+  reference_channel: 0
+  start_channel: 1
+  end_channel: 65
+  dead_channels:
+  sampling_frequency: 4000
+preprocessing:
+  raw_data_dir: /data/emg/nevin_28apr_1715 
+  notch_filters:
+  - 60
+  - 120
+  - 180
+  - 60
+  - 300
+  - 240
+  quality_factors:
+  - 10
+  - 5
+  - 2
+  - 4
+  - 2
+  - 2
+  bandpass_lower_bound: 20.0
+  bandpass_upper_bound: 500.0
+  downsample_factor: 4
+  reference_mode: average
+  blank_label: 0
+  require_ascii: true
+  binary_labels: false
+data:
+  preprocessed_data_dir: # /home3/john/emg_decoder/data/processed/nevin_28apr_1715
+  window_stride: 0.100  # in seconds
+  window_len: 2.500  # in seconds
+  train_proportion: 0.8
+  val_proportion: 0.1
+  test_proportion: 0.1
+  train_batch_size: 16
+  val_batch_size: 16
+  test_batch_size: 16
+model:
+  type: TemporalNet
+  rnn_type: lstm
+  conv_layers:
+  - - 4
+    - - 1
+      - 15
+    - 1
+    - - 1
+      - 3
+    - - 1
+      - 3
+  - - 8
+    - - 1
+      - 15
+    - 1
+    - - 1
+      - 3
+    - - 1
+      - 3
+  - - 16
+    - - 1
+      - 15
+    - 1
+    - - 1
+      - 3
+    - 1
+  - - 32
+    - - 1
+      - 15
+    - 1
+    - - 1
+      - 3
+    - 1
+  - - 32
+    - - 1
+      - 15
+    - 1
+    - - 1
+      - 3
+    - 1
+  - - 50
+    - - 1
+      - 15
+    - 1
+    - - 1
+      - 1
+    - 1
+optimizer:
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  eps: 0.001
+trainer:
+  max_epochs: 1000
+  patience: 100
+  monitor: val_acc
+  mode: max
+  save_top_k: 10
+  save_last: true

@@ -1,0 +1,35 @@
+name: ce_aug_keydecoder
+root_dir: /home3/john/emg_decoder 
+system: KeyDecoder
+random_seed: 4995
+data:
+  path: /home3/john/emg_decoder/data/processed/John-Zhou_2023-07-17_Open-Loop-Typing-Task/data.npy
+  window_length: 320
+  augment: True
+  subwindow_fraction: 0.75
+  num_views: 3
+  train_proportion: 0.8
+  val_proportion: 0.1
+  test_proportion: 0.1
+  train_batch_size: 32
+  val_batch_size: 32
+  test_batch_size: 32
+  num_workers: 4
+model:
+  type: KeyNet
+  loss: CrossEntropyLoss 
+  num_temporal_filters: 64
+  num_spatial_filters: 4
+  p_dropout: 0.5
+  avgpool_factor: 2
+optimizer:
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  eps: 0.001
+trainer:
+  max_epochs: 200
+  patience: 10
+  monitor: val_loss
+  mode: min
+  save_top_k: 10
+  save_last: true

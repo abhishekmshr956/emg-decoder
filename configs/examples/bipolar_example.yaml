@@ -1,0 +1,70 @@
+name: bipolar_test
+root_dir: /home3/john/emg_decoder
+system: RTDecoder
+random_seed: 4995
+metadata:
+  configuration: bipolar
+  offset: 2
+  append: true
+  reference_channel: 0
+  start_channel: 1
+  end_channel: 65
+  dead_channels:
+  sampling_frequency: 4000
+preprocessing:
+  raw_data_dir: /data/emg/nevin_28apr_1715
+  notch_filters:
+  - 60
+  - 120
+  - 180
+  - 60
+  - 300
+  - 240
+  quality_factors:
+  - 10
+  - 5
+  - 2
+  - 4
+  - 2
+  - 2
+  bandpass_lower_bound: 10.0
+  bandpass_upper_bound: 900.0
+  downsample_factor: 2 
+  reference_mode:
+  blank_label: 0
+  require_ascii: true
+  binary_labels: false
+data:
+  preprocessed_data_dir:
+  window_stride: 0.010  # in seconds
+  window_len: 0.010  # in seconds
+  interval_len: 2.500  # in seconds
+  interval_stride: 0.100  # in seconds
+  train_proportion: 0.8
+  val_proportion: 0.1
+  test_proportion: 0.1
+  train_batch_size: 16
+  val_batch_size: 16
+  test_batch_size: 16
+model:
+  type: EMGNet
+  rnn_type: gru
+  num_temporal_filters: 64
+  num_spatial_filters: 1
+  embed_dims: 64
+  num_rnn_layers: 2
+  use_batchnorm: false
+  p_dropout: 0.5
+  avgpool_factor1: 2
+optimizer:
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  eps: 0.001
+trainer:
+  max_epochs: 1000
+  patience: 100
+  monitor: val_acc
+  mode: max
+  save_top_k: 10
+  save_last: true
+

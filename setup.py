@@ -8,7 +8,7 @@ setup(
     packages=find_packages(),
     version='0.1.0',
     description='EMG decoders',
-    author='Abhishek Mishra',
+    author='John Luoyu Zhou',
     license='MIT',
 )
 

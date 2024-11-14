@@ -1,0 +1,29 @@
+name: condecoder_example
+root_dir: /Users/johnzhou/research/emg_decoder
+system: ConKeyDecoder
+random_seed: 4995
+data:
+  path: /Users/johnzhou/research/emg_decoder/data/processed/John-Zhou_2023-07-17_Open-Loop-Typing-Task/data.npy
+  window_length: 320
+  subwindow_fraction: 0.75
+  num_views: 5
+  train_proportion: 0.8
+  val_proportion: 0.2
+  train_batch_size: 64
+  val_batch_size: 64
+  num_workers: 4
+model:
+  type: KeyNet
+  num_temporal_filters: 64
+  num_spatial_filters: 4
+optimizer:
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  eps: 0.001
+trainer:
+  max_epochs: 200
+  patience: 10
+  monitor: val_loss
+  mode: min
+  save_top_k: 10
+  save_last: true

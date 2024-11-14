@@ -1,0 +1,34 @@
+name: john_left_aug 
+root_dir: /home3/john/emg_decoder 
+system: KeyDecoder
+random_seed: 4995
+data:
+  train_path:
+  val_path:
+  test_path: 
+  window_length: 240
+  train_proportion: 0.8
+  val_proportion: 0.1
+  test_proportion: 0.1
+  train_batch_size: 32
+  val_batch_size: 32
+  test_batch_size: 32
+  num_workers: 4
+model:
+  type: KeyNet
+  loss: CrossEntropyLoss
+  num_temporal_filters: 64
+  num_spatial_filters: 4
+  p_dropout: 0.5
+  avgpool_factor: 2
+optimizer:
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  eps: 0.001
+trainer:
+  max_epochs: 200
+  patience: 15
+  monitor: val_loss
+  mode: min
+  save_top_k: 5
+  save_last: true
